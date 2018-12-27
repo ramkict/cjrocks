@@ -11,7 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminMasterModule } from './admin-master/admin-master.module';
 import { WeightComponent } from './weight/weight.component';
-import { HttpModule } from '../../node_modules/@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginSessionGaurd, LazyGaurd } from './auth.gaurd';
+import { UnauthorizedComponent } from './utils/unauthorized/unauthorized.component';
+import { ErrorComponent } from './utils/error/error.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,14 @@ import { HttpModule } from '../../node_modules/@angular/http';
     FooterComponent,
     HomeComponent,
     WeightComponent,
+    UnauthorizedComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule, ReactiveFormsModule, FormsModule,
-    AppRoutingModule, AdminMasterModule, HttpModule
+    AppRoutingModule, AdminMasterModule, HttpClientModule
   ],
-  providers: [ApplicationSession],
+  providers: [ApplicationSession, LoginSessionGaurd, LazyGaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

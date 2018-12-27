@@ -1,21 +1,21 @@
-import { Injectable } from '../../../node_modules/@angular/core';
-import { Http, Headers } from '../../../node_modules/@angular/http';
-import { Observable } from '../../../node_modules/rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AdminService {
 
-    private URL: string; 
+    private URL: string;
 
-    constructor(public http: Http) {
+    constructor(public http: HttpClient) {
         this.URL = '';
     }
 
-    getRequest(url: string, headers?: Headers): Observable<any> {
+    getRequest(url: string, headers?: HttpHeaders): Observable<any> {
         return this.http.get(this.URL + url, { headers: headers });
     }
 
-    postRequest(url: string, requestBody: any, headers?: Headers): Observable<any> {
+    postRequest(url: string, requestBody: any, headers?: HttpHeaders): Observable<any> {
         if (headers) {
             return this.http.post(this.URL + url, requestBody, { headers: headers });
         } else {
@@ -24,7 +24,7 @@ export class AdminService {
 
     }
 
-    putRequest(url: string, requestBody: any, headers?: Headers): Observable<any> {
+    putRequest(url: string, requestBody: any, headers?: HttpHeaders): Observable<any> {
         if (headers) {
             return this.http.post(this.URL + url, requestBody, { headers: headers });
         } else {

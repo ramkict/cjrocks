@@ -23,9 +23,9 @@ export class ClientMasterComponent implements OnInit {
     this.adminService.getRequest('assets/data/client-master.json').subscribe(
       (data) => {
         console.log(data);
-        if (data && data._body != '') {
+        if (data && data != '') {
           try {
-            this.clientData = JSON.parse(data._body);
+            this.clientData = data;
           } catch (e) {
 
           }
