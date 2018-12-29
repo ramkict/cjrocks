@@ -7,11 +7,11 @@ import { WeightComponent } from './weight/weight.component';
 import { LoginSessionGaurd, LazyGaurd } from './auth.gaurd';
 
 const routes: Routes = [
-  { path: "", redirectTo: '/login', pathMatch: "full" },
-  { path: "login", component: LoginComponent },
-  { path: "home", component: HomeComponent, canActivate: [LoginSessionGaurd] },
-  { path: "weight", component: WeightComponent, canActivate: [LoginSessionGaurd] },
-  { path: "master", loadChildren: "./admin-master/admin-master.module#AdminMasterModule", canLoad: [LazyGaurd] }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent, canActivate: [LoginSessionGaurd] },
+  { path: 'weight', component: WeightComponent, canActivate: [LoginSessionGaurd] },
+  { path: 'admin', loadChildren: './admin-master/admin-master.module#AdminMasterModule', canLoad: [LazyGaurd] }
 ];
 
 @NgModule({

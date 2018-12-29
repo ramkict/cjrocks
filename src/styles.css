@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-.padding0{
+
+.padding0 {
     padding: 0;
 }
 
-.module-header{
+.module-header {
     font-size: 24px;
     border-bottom: 2px solid black;
+    padding: 5px;
 }

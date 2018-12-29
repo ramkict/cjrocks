@@ -8,7 +8,8 @@ export class AdminService {
     private URL: string;
 
     constructor(public http: HttpClient) {
-        this.URL = '';
+        // this.URL = 'http://localhost:2233/nlc';
+        this.URL = '/nlc';
     }
 
     getRequest(url: string, headers?: HttpHeaders): Observable<any> {
