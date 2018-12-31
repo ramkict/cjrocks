@@ -52,6 +52,9 @@ THE SOFTWARE.
 font-awesome
 (OFL-1.1 AND MIT)
 
+@angular/core
+MIT
+
 rxjs
 Apache-2.0
                                Apache License
@@ -258,19 +261,16 @@ Apache-2.0
  
 
 
-@angular/core
+@angular/forms
+MIT
+
+@angular/platform-browser
 MIT
 
 @angular/common
 MIT
 
 @angular/router
-MIT
-
-@angular/platform-browser
-MIT
-
-@angular/forms
 MIT
 
 tslib

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.session.isLogged = true;
-    this.router.navigate(['home']);
+    this.router.navigate(['admin']);
   }
 
 }

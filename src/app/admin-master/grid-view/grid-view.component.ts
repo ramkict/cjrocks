@@ -22,15 +22,19 @@ export class GridViewComponent implements OnInit {
   columns = [];
   moduleElement = {};
   subscriotion;
-  lookupObject = [];
+  lookupObject;
+  showView: boolean;
   constructor(public r: Router, public router: ActivatedRoute, public service: AdminService) {
+    this.showView = false;
     this.router.params.subscribe(params => {
+      this.showView = false;
       console.log(params);
       this.moduleName = params.m;
       this.config = ADMINCONFIG[this.moduleName];
-      this.lookupObject = [];
+      this.lookupObject = { 'department': {} };
       if (this.config.preload && this.config.preload.length > 0) {
         this.preloadLookup(this.config.preload);
+        console.log(this.lookupObject['department']);
       }
       this.editMode = false;
       this.columns = [];
@@ -41,6 +45,7 @@ export class GridViewComponent implements OnInit {
           this.columns.push(element);
         }
       });
+
     });
   }
 
@@ -50,6 +55,7 @@ export class GridViewComponent implements OnInit {
     console.log(event, selectedRow, row);
     this.moduleElement = row;
     this.editMode = true;
+    this.showView = true;
     this.formModel.nativeElement.click();
   }
   add() {
@@ -58,29 +64,43 @@ export class GridViewComponent implements OnInit {
     this.config.view.forEach(element => {
       if (element.formVisibility) {
         formObj += formObj === '' ? '' : ',';
-        formObj += '"' + element.columnName + '":""';
+        if (element.lookupkey && element.lookupkey != '') {
+          formObj += '"' + element.columnName + '":{}';
+        } else {
+          formObj += '"' + element.columnName + '":""';
+        }
       }
     });
     if (formObj !== '') {
       this.moduleElement = JSON.parse('{' + formObj + '}');
     }
+    this.showView = true;
     this.formModel.nativeElement.click();
   }
   preloadLookup(preload) {
-    
+    preload.forEach(element => {
+      this.service.getRequest(ADMINCONFIG[element].getURL).subscribe(
+        (data) => {
+          this.lookupObject[element] = data;
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    });
   }
   addData() {
     console.log(this.moduleElement);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.service.postRequest(this.config.createURL, this.moduleElement, headers).subscribe(
-      (data) => {
-        this.listData = data;
-        this.closeDialog.nativeElement.click();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+     this.service.postRequest(this.config.createURL, this.moduleElement, headers).subscribe(
+       (data) => {
+         this.listData = data;
+         this.closeDialog.nativeElement.click();
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
   }
   saveData() {
     console.log(this.moduleElement);
@@ -117,6 +137,7 @@ export class GridViewComponent implements OnInit {
         try {
           this.table.recalculate();
           this.listData = data;
+
         } catch (e) {
           console.log(e);
         }

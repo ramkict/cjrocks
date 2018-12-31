@@ -8,7 +8,8 @@ export class AdminService {
     private URL: string;
 
     constructor(public http: HttpClient) {
-        this.URL = 'http://localhost:2233/nlc';
+       // this.URL = 'http://localhost:2233/nlc';
+        this.URL = 'http://103.209.145.24:8098';
         // this.URL = '/nlc';
     }
 

@@ -1,3 +1,18 @@
 .modal-footer{
     border: 0;
 }
+
+.popup-footer{
+padding: 10px;
+text-align: right;
+}
+
+.popup-footer>button{
+    margin-right: 5px;
+}
+
+@media (min-width: 768px)
+.modal-dialog {
+    width: 760px;
+    margin: 30px auto;
+}

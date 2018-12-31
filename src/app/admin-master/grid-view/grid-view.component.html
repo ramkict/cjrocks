@@ -23,16 +23,16 @@
 </div>
 
 <a class="btn btn-primary" data-toggle="modal" href='#modal-id' #formModel style="display: none">Trigger modal</a>
-<div class="modal fade" id="modal-id">
+<div class="modal fade" id="modal-id" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Modal title</h4>
       </div>
-      <div class="modal-body">
+      <div  *ngIf="showView">
 
-        <div *ngFor="let col of config.view" class="col-xs-12" [ngClass]="{'col-sm-12':!config.twoColumn, 'col-sm-6':config.twoColumn}">
+        <div *ngFor="let col of config.view" class="col-xs-12" [ngClass]="{'col-sm-12':!config.twoColumn && !config.threeColumn, 'col-sm-6':config.twoColumn, 'col-sm-4':config.threeColumn}">
           <div *ngIf="col.formVisibility">
             <div [ngSwitch]="col.field">
               <div class="form-group" *ngSwitchCase="'input'">
@@ -47,9 +47,10 @@
               </div>
               <div class="form-group" *ngSwitchCase="'select'">
                 <label for=""> {{col.columnTitle}}</label>
-                <select [name]="col.columnName" id="input" class="form-control" [(ngModel)]="moduleElement[col.columnName]"
+                <select [name]="col.columnName" id="input" class="form-control" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]"
                   required="required">
                   <option value=""></option>
+                  <option *ngFor="let lookup of lookupObject[col.columnName]" [value]="lookup[col.lookupkey]">{{lookup[col.lookupdisplay]}}</option>
                 </select>
               </div>
               <div class="form-group" *ngSwitchDefault>
@@ -63,7 +64,7 @@
         </div>
 
       </div>
-      <div class="modal-footer">
+      <div class="popup-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" #closeDialog>Close</button>
         <button type="button" class="btn btn-primary" *ngIf="!editMode" (click)="addData()">Add {{config.labelText}}</button>
         <button type="button" class="btn btn-primary" *ngIf="editMode" (click)="saveData()">Update {{config.labelText}}</button>
