@@ -31,10 +31,9 @@ export class GridViewComponent implements OnInit {
       console.log(params);
       this.moduleName = params.m;
       this.config = ADMINCONFIG[this.moduleName];
-      this.lookupObject = { 'department': {} };
+      this.lookupObject = {};
       if (this.config.preload && this.config.preload.length > 0) {
         this.preloadLookup(this.config.preload);
-        console.log(this.lookupObject['department']);
       }
       this.editMode = false;
       this.columns = [];
@@ -84,7 +83,7 @@ export class GridViewComponent implements OnInit {
           this.lookupObject[element] = data;
         },
         (error) => {
-          console.log(error)
+          console.log(error);
         }
       )
     });

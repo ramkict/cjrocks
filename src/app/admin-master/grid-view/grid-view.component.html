@@ -30,9 +30,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Modal title</h4>
       </div>
-      <div  *ngIf="showView">
-
-        <div *ngFor="let col of config.view" class="col-xs-12" [ngClass]="{'col-sm-12':!config.twoColumn && !config.threeColumn, 'col-sm-6':config.twoColumn, 'col-sm-4':config.threeColumn}">
+      <div  *ngIf="showView" class="inpage-edit">
+        <div *ngFor="let col of config.view" class="col-xs-12" [ngClass]="col.cssClass">
           <div *ngIf="col.formVisibility">
             <div [ngSwitch]="col.field">
               <div class="form-group" *ngSwitchCase="'input'">

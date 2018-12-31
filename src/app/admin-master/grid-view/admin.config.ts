@@ -16,7 +16,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }, {
                 'columnName': 'departmentDescription',
                 'columnTitle': 'Description',
@@ -24,19 +25,11 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
-            },
-            {
-                'columnName': 'departmentId',
-                'columnTitle': 'ID',
-                'field': 'textarea',
-                'mandatory': true,
-                'flexGrow': '3',
-                'gridVisibility': false,
-                'formVisibility': false
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }
         ]
-    }, 'taxunit': {
+    }, 'taxUnit': {
         'title': 'Tax Unit Master',
         'labelText': 'Tax Unit',
         'keyField': 'taxUnitId',
@@ -53,7 +46,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }, {
                 'columnName': 'taxUnitDescription',
                 'columnTitle': 'Description',
@@ -61,7 +55,147 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }
+        ]
+    }, 'primaryMaterial': {
+        'title': 'Primary Material',
+        'labelText': 'Primary Material',
+        'keyField': 'primaryMaterialId',
+        'twoColumn': false,
+        'getURL': '/admintool/listPrimaryMaterials',
+        'updateURL': '/admintool/updatePrimaryMaterial/',
+        'deleteURL': '/admintool/deletePrimaryMaterial/',
+        'createURL': '/admintool/createPrimaryMaterial',
+        'view': [
+            {
+                'columnName': 'primaryMaterialCode',
+                'columnTitle': 'Material Code',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'primaryMaterialDescription',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }
+        ]
+    },
+    'secondaryMaterial': {
+        'title': 'Secondary Material',
+        'labelText': 'Secondary Material',
+        'keyField': 'secondaryMaterialId',
+        'twoColumn': false,
+        'preload': ['primaryMaterial'],
+        'getURL': '/admintool/listSecondaryMaterials',
+        'updateURL': '/admintool/updateSecondaryMaterial/',
+        'deleteURL': '/admintool/deleteSecondaryMaterial/',
+        'createURL': '/admintool/createSecondaryMaterial',
+        'view': [
+            {
+                'columnName': 'secondaryMaterialCode',
+                'columnTitle': 'Material Code',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'secondaryMaterialDescription',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'primaryMaterial',
+                'columnTitle': 'Primary Material',
+                'field': 'select',
+                'lookup': 'primarymaterial',
+                'lookupkey': 'primaryMaterialId',
+                'lookupdisplay': 'primaryMaterialCode',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }
+        ]
+    },
+    'material': {
+        'title': 'Material Master',
+        'labelText': 'Material',
+        'keyField': 'materialId',
+        'twoColumn': false,
+        'preload': ['primaryMaterial', 'secondaryMaterial'],
+        'getURL': '/admintool/listSecondaryMaterials',
+        'updateURL': '/admintool/updateSecondaryMaterial/',
+        'deleteURL': '/admintool/deleteSecondaryMaterial/',
+        'createURL': '/admintool/createSecondaryMaterial',
+        'view': [
+            {
+                'columnName': 'materialCode',
+                'columnTitle': 'Material Code',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'materialDescription',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'materialTaxability',
+                'columnTitle': 'Material Taxability',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'primaryMaterial',
+                'columnTitle': 'Primary Material',
+                'field': 'select',
+                'lookup': 'primarymaterial',
+                'lookupkey': 'primaryMaterialId',
+                'lookupdisplay': 'primaryMaterialCode',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'secondaryMaterial',
+                'columnTitle': 'Secondary Material',
+                'field': 'select',
+                'lookup': 'secondarymaterial',
+                'lookupkey': 'secondaryMaterialId',
+                'lookupdisplay': 'secondaryMaterialCode',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }
         ]
     },
@@ -82,7 +216,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }, {
                 'columnName': 'bayDescription',
                 'columnTitle': 'Description',
@@ -90,7 +225,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             },
             {
                 'columnName': 'bayCapacity',
@@ -99,7 +235,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }, {
                 'columnName': 'bayStatus',
                 'columnTitle': 'Status',
@@ -107,7 +244,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }
         ]
     }, 'folio': {
@@ -127,7 +265,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }
         ]
     },
@@ -149,7 +288,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }, {
                 'columnName': 'locationDescription',
                 'columnTitle': 'Description',
@@ -157,7 +297,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             },
             {
                 'columnName': 'department',
@@ -169,7 +310,165 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }
+        ]
+    },
+    'tax': {
+        'title': 'Tax Master',
+        'labelText': 'Tax',
+        'keyField': 'taxId',
+        'twoColumn': false,
+        'threeColumn': true,
+        'preload': ['taxUnit'],
+        'getURL': '/admintool/listTaxs',
+        'updateURL': '/admintool/updateTax/',
+        'deleteURL': '/admintool/deleteTax/',
+        'createURL': '/admintool/createTax',
+        'view': [
+            {
+                'columnName': 'taxName',
+                'columnTitle': 'Name',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'value',
+                'columnTitle': 'Tax Value',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'taxUnit',
+                'columnTitle': 'Tax Unit',
+                'field': 'select',
+                'lookup': 'taxUnit',
+                'lookupkey': 'taxUnitId',
+                'lookupdisplay': 'taxUnitName',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'taxDescription',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
+            }, {
+                'columnName': 'currentValue',
+                'columnTitle': 'Current Value',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'currentPeriod',
+                'columnTitle': 'Current Period',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'currentExemptedPeriod',
+                'columnTitle': 'Current Exempted Period',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'exemptedLocations',
+                'columnTitle': 'Exempted Location',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'futureValue',
+                'columnTitle': 'Future Value',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'futurePeriod',
+                'columnTitle': 'Futer Period ',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'reatedTimestamp',
+                'columnTitle': 'Reated Time stamp',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+        ]
+    },
+    'taxMapper': {
+        'title': 'Tax Mapper',
+        'labelText': 'Tax Mapper',
+        'keyField': 'taxMapperId',
+        'twoColumn': false,
+        'preload': ['tax', 'material'],
+        'getURL': '/admintool/listTaxMappers',
+        'updateURL': '/admintool/updateTaxMapper/',
+        'deleteURL': '/admintool/deleteTaxMapper/',
+        'createURL': '/admintool/createTaxMapper',
+        'view': [
+            {
+                'columnName': 'tax',
+                'columnTitle': 'Tax',
+                'field': 'select',
+                'lookup': 'tax',
+                'lookupkey': 'taxId',
+                'lookupdisplay': 'taxName',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'material',
+                'columnTitle': 'Material',
+                'field': 'select',
+                'lookup': 'material',
+                'lookupkey': 'materialId',
+                'lookupdisplay': 'materialName',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
             }
         ]
     },
@@ -186,21 +485,14 @@ export const ADMINCONFIG = {
         'createURL': '/admintool/createWeighBridge',
         'view': [
             {
-                'columnName': 'locationName',
+                'columnName': 'weighBridgeName',
                 'columnTitle': 'Name',
                 'field': 'text',
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
-            }, {
-                'columnName': 'locationDescription',
-                'columnTitle': 'Description',
-                'field': 'textarea',
-                'mandatory': true,
-                'flexGrow': '3',
-                'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             },
             {
                 'columnName': 'location',
@@ -212,23 +504,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
-                'formVisibility': true
-            }, {
-                'columnName': 'weighBridgeMake',
-                'columnTitle': 'Make',
-                'field': 'text',
-                'mandatory': true,
-                'flexGrow': '1',
-                'gridVisibility': true,
-                'formVisibility': true
-            }, {
-                'columnName': 'weighBridgeModel',
-                'columnTitle': 'Model',
-                'field': 'text',
-                'mandatory': true,
-                'flexGrow': '1',
-                'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeDocument',
                 'columnTitle': 'Document',
@@ -236,7 +513,35 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'weighBridgeDescription   ',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
+            }, {
+                'columnName': 'weighBridgeMake',
+                'columnTitle': 'Make',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'weighBridgeModel',
+                'columnTitle': 'Model',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeDateOfInstallation',
                 'columnTitle': 'Date of Installation',
@@ -244,7 +549,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeCapacity',
                 'columnTitle': 'Capacity',
@@ -252,7 +558,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeBaudRate',
                 'columnTitle': 'Baud Rate',
@@ -260,7 +567,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeCalibrationDate',
                 'columnTitle': 'Last Calibration Date',
@@ -268,7 +576,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'nextWeighBridgeCalibrationDate',
                 'columnTitle': 'next Calibration Date',
@@ -276,7 +585,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeSerialPortParity',
                 'columnTitle': 'Serial Port Parity',
@@ -284,7 +594,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeSerialPortStartBit',
                 'columnTitle': 'Serial Port Start Bit',
@@ -292,7 +603,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }, {
                 'columnName': 'weighBridgeSerialPortStoptBit',
                 'columnTitle': 'Serial Port Stop Bit',
@@ -300,7 +612,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': false,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
             }
         ]
     },
@@ -321,7 +634,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
             },
             {
                 'columnName': 'clientStateCode',
@@ -330,7 +644,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
             },
             {
                 'columnName': 'clientDistrict',
@@ -339,7 +654,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
             },
             {
                 'columnName': 'clientState',
@@ -348,7 +664,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
             },
             {
                 'columnName': 'clientPinCode',
@@ -357,7 +674,8 @@ export const ADMINCONFIG = {
                 'mandatory': true,
                 'flexGrow': '1',
                 'gridVisibility': true,
-                'formVisibility': true
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
             },
         ]
     }

@@ -1,18 +1,30 @@
-.modal-footer{
+.modal-footer {
     border: 0;
 }
 
-.popup-footer{
-padding: 10px;
-text-align: right;
+.popup-footer {
+    padding: 10px;
+    text-align: right;
 }
 
-.popup-footer>button{
+.popup-footer>button {
     margin-right: 5px;
 }
 
-@media (min-width: 768px)
-.modal-dialog {
-    width: 760px;
-    margin: 30px auto;
+.inpage-edit {
+    min-height: 500px;
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 768px;
+        margin: 30px auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-dialog {
+        width: 991px;
+        margin: 30px auto;
+    }
 }
