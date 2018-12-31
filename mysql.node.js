@@ -9,8 +9,11 @@
 
 var express = require('express');
 var request = require('request');
+var cors = require('cors');
+
 var app = express();
 
+app.use(cors({origin:true,credentials: true}));
 
 // connection.connect(function (err) {
 //     if (err) {
@@ -31,11 +34,15 @@ app.use('/nlc', function (req, res) {
     var url = 'http://103.209.145.24:8098' + req.url;
     console.log(url);
     var r = null;
-    console.log(req.method,req.body);
+    //req.headers['Content-Type'] = 'application/json';
+    console.log(req.method);
     if (req.method === 'POST') {
         r = request.post({ uri: url, json: req.body });
     } else if (req.method === 'PUT') {
         r = request.put({ uri: url, json: req.body });
+    } else if( req.method === 'DELETE') {
+        console.log("Del")
+        r = request.delete({uri: url});
     }
     else {
         r = request(url);

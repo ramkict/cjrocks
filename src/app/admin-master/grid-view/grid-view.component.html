@@ -9,7 +9,9 @@
     [rows]="listData" [limit]="10">Í
     <ngx-datatable-column *ngFor="let col of columns" [name]="col.columnTitle" [prop]="col.columnName" [flexGrow]="2">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{value}}
+        <span *ngIf="!col.lookupkey">{{value}}</span>
+        <span *ngIf="col.lookupkey!==''">{{value[col.lookupdisplay]}}</span>
+
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Actions" prop="id" [flexGrow]="1">
@@ -30,15 +32,27 @@
       </div>
       <div class="modal-body">
 
-        <div *ngFor="let col of config.view" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div *ngFor="let col of config.view" class="col-xs-12" [ngClass]="{'col-sm-12':!config.twoColumn, 'col-sm-6':config.twoColumn}">
           <div *ngIf="col.formVisibility">
             <div [ngSwitch]="col.field">
-              <div class="form-group col-xs-12 col-sm-6" *ngSwitchCase="'input'">
+              <div class="form-group" *ngSwitchCase="'input'">
                 <label for=""> {{col.columnTitle}}</label>
                 <input type="text" [name]="col.columnName" class="form-control" [placeholder]="col.columnTitle"
                   [(ngModel)]="moduleElement[col.columnName]">
               </div>
-              <div class="form-group col-xs-12 col-sm-6" *ngSwitchDefault>
+              <div class="form-group" *ngSwitchCase="'textarea'">
+                <label for=""> {{col.columnTitle}}</label>
+                <textarea [name]="col.columnName" id="input" class="form-control" rows="3" [placeholder]="col.columnTitle"
+                  [(ngModel)]="moduleElement[col.columnName]"></textarea>
+              </div>
+              <div class="form-group" *ngSwitchCase="'select'">
+                <label for=""> {{col.columnTitle}}</label>
+                <select [name]="col.columnName" id="input" class="form-control" [(ngModel)]="moduleElement[col.columnName]"
+                  required="required">
+                  <option value=""></option>
+                </select>
+              </div>
+              <div class="form-group" *ngSwitchDefault>
                 <label for=""> {{col.columnTitle}}</label>
                 <input type="text" [name]="col.columnName" class="form-control" [placeholder]="col.columnTitle"
                   [(ngModel)]="moduleElement[col.columnName]">
@@ -50,8 +64,11 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addData()">Add {{config.labelText}}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" #closeDialog>Close</button>
+        <button type="button" class="btn btn-primary" *ngIf="!editMode" (click)="addData()">Add {{config.labelText}}</button>
+        <button type="button" class="btn btn-primary" *ngIf="editMode" (click)="saveData()">Update {{config.labelText}}</button>
+        <button type="button" class="btn btn-primary" *ngIf="editMode" (click)="deleteData()">Delete
+          {{config.labelText}}</button>
       </div>
     </div>
   </div>
