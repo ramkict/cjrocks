@@ -123,7 +123,7 @@ export const ADMINCONFIG = {
                 'columnName': 'primaryMaterial',
                 'columnTitle': 'Primary Material',
                 'field': 'select',
-                'lookup': 'primarymaterial',
+                'lookup': 'primaryMaterial',
                 'lookupkey': 'primaryMaterialId',
                 'lookupdisplay': 'primaryMaterialCode',
                 'mandatory': true,
@@ -139,11 +139,11 @@ export const ADMINCONFIG = {
         'labelText': 'Material',
         'keyField': 'materialId',
         'twoColumn': false,
-        'preload': ['primaryMaterial', 'secondaryMaterial'],
-        'getURL': '/admintool/listSecondaryMaterials',
-        'updateURL': '/admintool/updateSecondaryMaterial/',
-        'deleteURL': '/admintool/deleteSecondaryMaterial/',
-        'createURL': '/admintool/createSecondaryMaterial',
+        'preload': ['primaryMaterial'],
+        'getURL': '/admintool/listMaterials',
+        'updateURL': '/admintool/updateMaterial/',
+        'deleteURL': '/admintool/deleteMaterial/',
+        'createURL': '/admintool/createMaterial',
         'view': [
             {
                 'columnName': 'materialCode',
@@ -175,10 +175,11 @@ export const ADMINCONFIG = {
             }, {
                 'columnName': 'primaryMaterial',
                 'columnTitle': 'Primary Material',
-                'field': 'select',
-                'lookup': 'primarymaterial',
+                'field': 'parentSelect',
+                'lookup': 'primaryMaterial',
                 'lookupkey': 'primaryMaterialId',
                 'lookupdisplay': 'primaryMaterialCode',
+                'childName': 'secondaryMaterials',
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
@@ -187,8 +188,9 @@ export const ADMINCONFIG = {
             }, {
                 'columnName': 'secondaryMaterial',
                 'columnTitle': 'Secondary Material',
-                'field': 'select',
-                'lookup': 'secondarymaterial',
+                'field': 'childSelect',
+                'parent': 'primaryMaterial',
+                'lookup': 'secondaryMaterials',
                 'lookupkey': 'secondaryMaterialId',
                 'lookupdisplay': 'secondaryMaterialCode',
                 'mandatory': true,
@@ -259,6 +261,16 @@ export const ADMINCONFIG = {
         'createURL': '/admintool/createFolio',
         'view': [
             {
+                'columnName': 'folioName',
+                'columnTitle': 'Name',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            },
+            {
                 'columnName': 'folioDescription',
                 'columnTitle': 'Description',
                 'field': 'textarea',
@@ -322,7 +334,7 @@ export const ADMINCONFIG = {
         'twoColumn': false,
         'threeColumn': true,
         'preload': ['taxUnit'],
-        'getURL': '/admintool/listTaxs',
+        'getURL': '/admintool/listTaxes',
         'updateURL': '/admintool/updateTax/',
         'deleteURL': '/admintool/deleteTax/',
         'createURL': '/admintool/createTax',
@@ -478,7 +490,7 @@ export const ADMINCONFIG = {
         'keyField': 'weighBridgeId',
         'twoColumn': false,
         'threeColumn': true,
-        'preload': ['location'],
+        'preload': ['department'],
         'getURL': '/admintool/listWeighBridges',
         'updateURL': '/admintool/updateWeighBridge/',
         'deleteURL': '/admintool/deleteWeighBridge/',
@@ -493,12 +505,25 @@ export const ADMINCONFIG = {
                 'gridVisibility': true,
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
-            },
-            {
+            }, {
+                'columnName': 'department',
+                'columnTitle': 'Department',
+                'field': 'parentSelect',
+                'lookup': 'department',
+                'lookupkey': 'departmentId',
+                'lookupdisplay': 'departmentName',
+                'childName': 'locations',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
                 'columnName': 'location',
                 'columnTitle': 'Location',
-                'field': 'select',
-                'lookup': 'location',
+                'field': 'childSelect',
+                'parent': 'department',
+                'lookup': 'locations',
                 'lookupkey': 'locationId',
                 'lookupdisplay': 'locationName',
                 'mandatory': true,
@@ -506,6 +531,16 @@ export const ADMINCONFIG = {
                 'gridVisibility': true,
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'weighBridgeDescription   ',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
             }, {
                 'columnName': 'weighBridgeDocument',
                 'columnTitle': 'Document',
@@ -515,15 +550,6 @@ export const ADMINCONFIG = {
                 'gridVisibility': true,
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
-            }, {
-                'columnName': 'weighBridgeDescription   ',
-                'columnTitle': 'Description',
-                'field': 'textarea',
-                'mandatory': true,
-                'flexGrow': '3',
-                'gridVisibility': true,
-                'formVisibility': true,
-                'cssClass': 'col-xs-12 col-sm-12'
             }, {
                 'columnName': 'weighBridgeMake',
                 'columnTitle': 'Make',

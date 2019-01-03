@@ -23,6 +23,7 @@ export class GridViewComponent implements OnInit {
   moduleElement = {};
   subscriotion;
   lookupObject;
+  childLookupObject;
   showView: boolean;
   constructor(public r: Router, public router: ActivatedRoute, public service: AdminService) {
     this.showView = false;
@@ -32,8 +33,10 @@ export class GridViewComponent implements OnInit {
       this.moduleName = params.m;
       this.config = ADMINCONFIG[this.moduleName];
       this.lookupObject = {};
+      this.childLookupObject = {};
       if (this.config.preload && this.config.preload.length > 0) {
         this.preloadLookup(this.config.preload);
+        console.log(this.lookupObject['department']);
       }
       this.editMode = false;
       this.columns = [];
@@ -85,21 +88,21 @@ export class GridViewComponent implements OnInit {
         (error) => {
           console.log(error);
         }
-      )
+      );
     });
   }
   addData() {
     console.log(this.moduleElement);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-     this.service.postRequest(this.config.createURL, this.moduleElement, headers).subscribe(
-       (data) => {
-         this.listData = data;
-         this.closeDialog.nativeElement.click();
-       },
-       (error) => {
-         console.log(error);
-       }
-     );
+    this.service.postRequest(this.config.createURL, this.moduleElement, headers).subscribe(
+      (data) => {
+        this.listData = data;
+        this.closeDialog.nativeElement.click();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   saveData() {
     console.log(this.moduleElement);
@@ -130,6 +133,18 @@ export class GridViewComponent implements OnInit {
       }
     );
   }
+
+  onSelectChanges(parentLookup: string, childLookup: string, parentKeyField: string, parentKey: any) {
+    if (this.lookupObject[parentLookup] !== undefined) {
+      const childObj = this.lookupObject[parentLookup].filter(item => {
+        return item[parentKeyField] === parentKey;
+      });
+      if (childObj && childObj.length > 0) {
+        this.childLookupObject[childLookup] = childObj[0][childLookup];
+      }
+    }
+  }
+
   loadListData() {
     this.service.getRequest(this.config.getURL).subscribe(
       (data) => {
