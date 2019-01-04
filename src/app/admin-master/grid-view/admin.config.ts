@@ -29,6 +29,123 @@ export const ADMINCONFIG = {
                 'cssClass': 'col-xs-12'
             }
         ]
+    }, 'userRole': {
+        'title': 'User Roles',
+        'labelText': 'User Role',
+        'keyField': 'userRoleId',
+        'twoColumn': false,
+        'getURL': '/admintool/listUserRoles',
+        'updateURL': '/admintool/updateUserRole/',
+        'deleteURL': '/admintool/deleteUserRole/',
+        'createURL': '/admintool/createUserRole',
+        'view': [
+            {
+                'columnName': 'userRoleName',
+                'columnTitle': 'Name',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'userRoleDescription',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }
+        ]
+    }, 'user': {
+        'title': 'User Roles',
+        'labelText': 'User Role',
+        'keyField': 'userRoleId',
+        'twoColumn': false,
+        'preload': ['department', 'userRole'],
+        'getURL': '/admintool/listUsers',
+        'updateURL': '/admintool/updateUser/',
+        'deleteURL': '/admintool/deleteUser/',
+        'createURL': '/admintool/createUser',
+        'view': [
+            {
+                'columnName': 'userEmployeeId',
+                'columnTitle': 'Employee ID',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'userName',
+                'columnTitle': 'User Name',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'userDesignation',
+                'columnTitle': 'Designation',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'userContactNumber',
+                'columnTitle': 'Contact Number',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'department',
+                'columnTitle': 'Department',
+                'field': 'parentSelect',
+                'lookup': 'department',
+                'lookupkey': 'departmentId',
+                'lookupdisplay': 'departmentName',
+                'childName': 'locations',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'location',
+                'columnTitle': 'Location',
+                'field': 'childSelect',
+                'parent': 'department',
+                'lookup': 'locations',
+                'lookupkey': 'locationId',
+                'lookupdisplay': 'locationName',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },{
+                'columnName': 'userRole',
+                'columnTitle': 'User Role',
+                'field': 'select',
+                'lookup': 'userRole',
+                'lookupkey': 'userRoleId',
+                'lookupdisplay': 'userRoleName',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }
+        ]
     }, 'taxUnit': {
         'title': 'Tax Unit Master',
         'labelText': 'Tax Unit',
@@ -458,24 +575,24 @@ export const ADMINCONFIG = {
         'createURL': '/admintool/createTaxMapper',
         'view': [
             {
-                'columnName': 'tax',
-                'columnTitle': 'Tax',
+                'columnName': 'material',
+                'columnTitle': 'Material',
                 'field': 'select',
-                'lookup': 'tax',
-                'lookupkey': 'taxId',
-                'lookupdisplay': 'taxName',
+                'lookup': 'material',
+                'lookupkey': 'materialId',
+                'lookupdisplay': 'materialCode',
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
                 'formVisibility': true,
                 'cssClass': 'col-xs-12'
             }, {
-                'columnName': 'material',
-                'columnTitle': 'Material',
-                'field': 'select',
-                'lookup': 'material',
-                'lookupkey': 'materialId',
-                'lookupdisplay': 'materialName',
+                'columnName': 'taxes',
+                'columnTitle': 'Tax',
+                'field': 'multiSelect',
+                'lookup': 'tax',
+                'lookupkey': 'taxId',
+                'lookupdisplay': 'taxName',
                 'mandatory': true,
                 'flexGrow': '3',
                 'gridVisibility': true,
@@ -643,7 +760,71 @@ export const ADMINCONFIG = {
             }
         ]
     },
-    'clientaddress': {
+    'client': {
+        'title': 'Client Address Master',
+        'labelText': 'Address',
+        'keyField': 'clientId',
+        'twoColumn': true,
+        'preload': ['clientAddress'],
+        'getURL': '/admintool/listClients',
+        'updateURL': '/admintool/updateClient/',
+        'deleteURL': '/admintool/deleteClient/',
+        'createURL': '/admintool/createClient',
+        'view': [
+            {
+                'columnName': 'clientContactPersonName',
+                'columnTitle': 'Contact Person Name',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-6'
+            }, {
+                'columnName': 'clientContactPersonNumber',
+                'columnTitle': 'Contact Person Number',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-6'
+            }, {
+                'columnName': 'clientDescription',
+                'columnTitle': 'Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            },
+            {
+                'columnName': 'clientAddresses',
+                'columnTitle': 'Addresses',
+                'field': 'multiSelect',
+                'lookup': 'clientAddress',
+                'lookupkey': 'clientAddressId',
+                'lookupdisplay': 'clientStreet',
+                'additionalLookupDisplay': ['clientDistrict', 'clientState', 'clientPinCode'],
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12'
+            }, {
+                'columnName': 'clientGSTIN',
+                'columnTitle': 'GSTIN',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '3',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-6'
+            }
+        ]
+    },
+    'clientAddress': {
         'title': 'Client Address Master',
         'labelText': 'Address',
         'keyField': 'clientAddressId',
@@ -663,16 +844,7 @@ export const ADMINCONFIG = {
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-12'
             },
-            {
-                'columnName': 'clientStateCode',
-                'columnTitle': 'Street Code',
-                'field': 'text',
-                'mandatory': true,
-                'flexGrow': '1',
-                'gridVisibility': true,
-                'formVisibility': true,
-                'cssClass': 'col-xs-12 col-sm-12'
-            },
+
             {
                 'columnName': 'clientDistrict',
                 'columnTitle': 'District',
@@ -686,6 +858,15 @@ export const ADMINCONFIG = {
             {
                 'columnName': 'clientState',
                 'columnTitle': 'State',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
+            }, {
+                'columnName': 'clientStateCode',
+                'columnTitle': 'State Code',
                 'field': 'text',
                 'mandatory': true,
                 'flexGrow': '1',

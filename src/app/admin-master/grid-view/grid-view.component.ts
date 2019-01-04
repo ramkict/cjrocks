@@ -1,3 +1,4 @@
+import { ApplicationSession } from './../../app.session';
 import { HttpHeaders } from '@angular/common/http';
 import { AdminService } from './../admin.service';
 import { ADMINCONFIG } from './admin.config';
@@ -25,7 +26,7 @@ export class GridViewComponent implements OnInit {
   lookupObject;
   childLookupObject;
   showView: boolean;
-  constructor(public r: Router, public router: ActivatedRoute, public service: AdminService) {
+  constructor(public r: Router, public router: ActivatedRoute, public service: AdminService, public session: ApplicationSession) {
     this.showView = false;
     this.router.params.subscribe(params => {
       this.showView = false;
@@ -94,13 +95,31 @@ export class GridViewComponent implements OnInit {
   addData() {
     console.log(this.moduleElement);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const multiSelectElements = this.config.view.filter(element => {
+      return element.field === 'multiSelect';
+    });
+    if (multiSelectElements !== undefined && multiSelectElements.length > 0) {
+      multiSelectElements.forEach(element => {
+        const lookupElement = this.moduleElement[element.columnName][element.lookupkey];
+        delete this.moduleElement[element.columnName];
+        this.moduleElement[element.columnName] = [];
+        lookupElement.forEach(data => {
+          const dataObject = {};
+          dataObject[element.lookupkey] = data;
+          this.moduleElement[element.columnName].push(dataObject);
+        });
+      });
+    }
+    this.session.showLoader();
     this.service.postRequest(this.config.createURL, this.moduleElement, headers).subscribe(
       (data) => {
         this.listData = data;
         this.closeDialog.nativeElement.click();
+        this.session.hideLoader();
       },
       (error) => {
         console.log(error);
+        this.session.hideLoader();
       }
     );
   }

@@ -264,6 +264,9 @@ MIT
 @angular/common
 MIT
 
+@ng-select/ng-select
+MIT
+
 @angular/router
 MIT
 

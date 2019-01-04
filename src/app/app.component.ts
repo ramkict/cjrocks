@@ -8,7 +8,8 @@ import { ApplicationSession } from './app.session';
 })
 export class AppComponent {
   title = 'yedai';
-  constructor(public session: ApplicationSession){
-    
+  apiCall: boolean;
+  constructor(public session: ApplicationSession) {
+
   }
 }

@@ -8,12 +8,13 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AdminService } from './admin.service';
 import { ReactiveFormsModule, FormsModule } from '../../../node_modules/@angular/forms';
 import { MasterHomeComponent } from './master-home/master-home.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
   declarations: [AdminMasterComponent, SidebarComponent, GridViewComponent, MasterHomeComponent],
   imports: [
-    CommonModule, AdminMasterRouter, NgxDatatableModule, ReactiveFormsModule, FormsModule
+    CommonModule, AdminMasterRouter, NgxDatatableModule, ReactiveFormsModule, NgSelectModule, FormsModule
   ],
   providers: [AdminService]
 })

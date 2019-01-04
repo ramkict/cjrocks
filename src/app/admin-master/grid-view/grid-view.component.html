@@ -49,8 +49,21 @@
                 <select [name]="col.columnName" id="input" class="form-control" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]"
                   required="required">
                   <option value=""></option>
-                  <option *ngFor="let lookup of lookupObject[col.lookup]" [ngValue]="lookup">{{lookup[col.lookupdisplay]}}</option>
+                  <option *ngFor="let lookup of lookupObject[col.lookup]" [value]="lookup[col.lookupkey]">{{lookup[col.lookupdisplay]}}</option>
                 </select>
+              </div>
+              <div class="form-group" *ngSwitchCase="'multiSelect'">
+                <label for=""> {{col.columnTitle}}</label>
+
+                <ng-select [items]="lookupObject[col.lookup]" [multiple]="true" [bindLabel]="col.lookupdisplay"
+                  [closeOnSelect]="false" [bindValue]="col.lookupkey" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]">
+                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
+                    <span>{{item[col.lookupdisplay]}}</span>
+                    <span *ngFor="let additionalDisplay of col.additionalLookupDisplay">{{item[additionalDisplay]}}</span>
+                  </ng-template>
+                </ng-select>
+
               </div>
               <div class="form-group" *ngSwitchCase="'parentSelect'">
                 <label for=""> {{col.columnTitle}}</label>
