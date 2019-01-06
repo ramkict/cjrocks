@@ -11,7 +11,9 @@
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <span *ngIf="!col.lookupkey">{{value}}</span>
         <span *ngIf="col.lookupkey!==''">{{value[col.lookupdisplay]}}</span>
-
+        <span *ngIf="col.looupkey!=='' && col.field==='multiSelect'">
+          <span *ngFor="let ar of value">{{ar[col.lookupdisplay]}}</span>
+        </span>
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Actions" prop="id" [flexGrow]="1">
@@ -37,54 +39,76 @@
               <div class="form-group" *ngSwitchCase="'input'">
                 <label for=""> {{col.columnTitle}}</label>
                 <input type="text" [name]="col.columnName" class="form-control" [placeholder]="col.columnTitle"
-                  [(ngModel)]="moduleElement[col.columnName]">
+                  [(ngModel)]="moduleElement[col.columnName]" [required]="col.mandatory?'':null" #inputbox="ngModel">
+                <div *ngIf="col.mandatory" [hidden]="inputbox.valid || inputbox.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
               <div class="form-group" *ngSwitchCase="'textarea'">
                 <label for=""> {{col.columnTitle}}</label>
                 <textarea [name]="col.columnName" id="input" class="form-control" rows="3" [placeholder]="col.columnTitle"
-                  [(ngModel)]="moduleElement[col.columnName]"></textarea>
+                  [(ngModel)]="moduleElement[col.columnName]" [required]="col.mandatory?'':null" #textarea="ngModel"></textarea>
+                <div *ngIf="col.mandatory" [hidden]="textarea.valid || textarea.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
               <div class="form-group" *ngSwitchCase="'select'">
                 <label for=""> {{col.columnTitle}}</label>
                 <select [name]="col.columnName" id="input" class="form-control" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]"
-                  required="required">
+                  [required]="col.mandatory?'':null" #select="ngModel">
                   <option value=""></option>
                   <option *ngFor="let lookup of lookupObject[col.lookup]" [value]="lookup[col.lookupkey]">{{lookup[col.lookupdisplay]}}</option>
                 </select>
+                <div *ngIf="col.mandatory" [hidden]="select.valid || select.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
               <div class="form-group" *ngSwitchCase="'multiSelect'">
                 <label for=""> {{col.columnTitle}}</label>
 
                 <ng-select [items]="lookupObject[col.lookup]" [multiple]="true" [bindLabel]="col.lookupdisplay"
-                  [closeOnSelect]="false" [bindValue]="col.lookupkey" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]">
+                  [closeOnSelect]="false" [bindValue]="col.lookupkey" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]"
+                  [required]="col.mandatory?'':null" #mselect="ngModel">
                   <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                     <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />
                     <span>{{item[col.lookupdisplay]}}</span>
                     <span *ngFor="let additionalDisplay of col.additionalLookupDisplay">{{item[additionalDisplay]}}</span>
                   </ng-template>
                 </ng-select>
-
+                <div *ngIf="col.mandatory" [hidden]="mselect.valid || mselect.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
               <div class="form-group" *ngSwitchCase="'parentSelect'">
                 <label for=""> {{col.columnTitle}}</label>
                 <select [name]="col.columnName" id="input" class="form-control" (change)="onSelectChanges(col.columnName,col.childName,col.lookupkey,$event.target.value)"
-                  [(ngModel)]="moduleElement[col.columnName][col.lookupkey]" required="required">
+                  [(ngModel)]="moduleElement[col.columnName][col.lookupkey]" [required]="col.mandatory?'':null"
+                  #pselect="ngModel">
                   <option value=""></option>
                   <option *ngFor="let lookup of lookupObject[col.lookup]" [value]="lookup[col.lookupkey]">{{lookup[col.lookupdisplay]}}</option>
                 </select>
+                <div *ngIf="col.mandatory" [hidden]="pselect.valid || pselect.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
               <div class="form-group" *ngSwitchCase="'childSelect'">
                 <label for=""> {{col.columnTitle}}</label>
                 <select [name]="col.columnName" id="input" class="form-control" [(ngModel)]="moduleElement[col.columnName][col.lookupkey]"
-                  required="required">
+                  [required]="col.mandatory?'':null" #cselect='ngModel'>
                   <option value=""></option>
                   <option *ngFor="let lookup of childLookupObject[col.lookup]" [value]="lookup[col.lookupkey]">{{lookup[col.lookupdisplay]}}</option>
                 </select>
+                <div *ngIf="col.mandatory" [hidden]="cselect.valid || cselect.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
               <div class="form-group" *ngSwitchDefault>
                 <label for=""> {{col.columnTitle}}</label>
                 <input type="text" [name]="col.columnName" class="form-control" [placeholder]="col.columnTitle"
-                  [(ngModel)]="moduleElement[col.columnName]">
+                  [(ngModel)]="moduleElement[col.columnName]" [required]="col.mandatory?'':null" #defbox="ngModel">
+                <div *ngIf="col.mandatory" [hidden]="defbox.valid || defbox.pristine" class="alert alert-danger">
+                  {{col.columnTitle}} is required
+                </div>
               </div>
 
             </div>

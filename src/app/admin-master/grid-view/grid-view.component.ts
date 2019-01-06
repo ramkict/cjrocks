@@ -16,8 +16,16 @@ export class GridViewComponent implements OnInit {
   @ViewChild('formModel') formModel: ElementRef;
   @ViewChild('closeDialog') closeDialog: ElementRef;
   @ViewChild('table') table: DatatableComponent;
+  @ViewChild('defbox') defbox: any;
+  @ViewChild('inputbox') inputbox: any;
+  @ViewChild('textarea') textarea: any;
+  @ViewChild('select') select: any;
+  @ViewChild('mselect') mselect: any;
+  @ViewChild('pselect') pselect: any;
+  @ViewChild('cselect') cselect: any;
   moduleName;
   config;
+  dateTime1;
   editMode: boolean;
   listData: any[];
   columns = [];
@@ -57,6 +65,19 @@ export class GridViewComponent implements OnInit {
   edit(event, selectedRow, row) {
     console.log(event, selectedRow, row);
     this.moduleElement = row;
+    const multiSelectElements = this.config.view.filter(element => {
+      return element.field === 'multiSelect';
+    });
+    if (multiSelectElements !== undefined && multiSelectElements.length > 0) {
+      multiSelectElements.forEach(element => {
+        const multiLookup = this.moduleElement[element.columnName];
+        let ids = [];
+        multiLookup.forEach(lookupObject => {
+          ids.push(lookupObject[element.lookupkey]);
+        });
+        this.moduleElement[element.columnName][element.lookupkey] = ids;
+      });
+    }
     this.editMode = true;
     this.showView = true;
     this.formModel.nativeElement.click();
@@ -124,35 +145,69 @@ export class GridViewComponent implements OnInit {
     );
   }
   saveData() {
-    console.log(this.moduleElement);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const requestObject = { ...this.moduleElement };
-    delete requestObject[this.config.keyField];
-    this.service.putRequest(this.config.updateURL + this.moduleElement[this.config.keyField], requestObject, headers).subscribe(
-      (data) => {
-        this.listData = data;
-        this.closeDialog.nativeElement.click();
-      },
-      (error) => {
-        console.log(error);
+    if (this.isValidToProceed()) {
+      console.log(this.moduleElement);
+      const multiSelectElements = this.config.view.filter(element => {
+        return element.field === 'multiSelect';
+      });
+      if (multiSelectElements !== undefined && multiSelectElements.length > 0) {
+        multiSelectElements.forEach(element => {
+          const lookupElement = this.moduleElement[element.columnName][element.lookupkey];
+          delete this.moduleElement[element.columnName];
+          this.moduleElement[element.columnName] = [];
+          lookupElement.forEach(data => {
+            const dataObject = {};
+            dataObject[element.lookupkey] = data;
+            this.moduleElement[element.columnName].push(dataObject);
+          });
+        });
       }
-    );
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      const requestObject = { ...this.moduleElement };
+      delete requestObject[this.config.keyField];
+      this.service.putRequest(this.config.updateURL + this.moduleElement[this.config.keyField], requestObject, headers).subscribe(
+        (data) => {
+          this.listData = data;
+          this.closeDialog.nativeElement.click();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   deleteData() {
-    console.log(this.moduleElement);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.service.deleteRequest(this.config.deleteURL + this.moduleElement[this.config.keyField]).subscribe(
-      (data) => {
-        this.listData = data;
-        this.closeDialog.nativeElement.click();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+    if (this.isValidToProceed()) {
+      console.log(this.moduleElement);
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      this.service.deleteRequest(this.config.deleteURL + this.moduleElement[this.config.keyField]).subscribe(
+        (data) => {
+          this.listData = data;
+          this.closeDialog.nativeElement.click();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
 
+  }
+  isValidToProceed(): boolean {
+    /*
+     * checking mandatory field should be dirty else don't allow to proceed to submit the form
+     * TODO ---
+     * try to make multiple forms control into single form control make single object for validations
+     */
+    if ((this.defbox && this.defbox.invalid) || (this.textarea && this.textarea.invalid) ||
+      (this.inputbox && this.inputbox.invalid) || (this.select && this.select.invalid)
+        (this.mselect && this.mselect.invalid) || (this.pselect && this.pselect.invalid) ||
+      (this.cselect && this.cselect.invalid)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   onSelectChanges(parentLookup: string, childLookup: string, parentKeyField: string, parentKey: any) {
     if (this.lookupObject[parentLookup] !== undefined) {
       const childObj = this.lookupObject[parentLookup].filter(item => {

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default " role="navigation">
+<!-- <nav class="navbar navbar-default " role="navigation">
   <div class="">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
@@ -10,6 +10,29 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Unit Master <span class="caret"></span></a>
+          <ul class="dropdown-menu forAnimate" role="menu">
+           
+          </ul>
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
+
+<div class="nav-side-menu">
+  <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+  <div class="menu-list">
+
+    <ul id="menu-content" class="menu-content collapse out">
+      <li data-toggle="collapse" data-target="#unit" class="collapsed active">
+        <a><i class="fa fa-gift fa-lg"></i> Unit Master <span class="arrow"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="unit">
         <li routerLinkActive="active">
           <a routerLink="master/department"> Department</a>
         </li>
@@ -19,6 +42,11 @@
         <li routerLinkActive="active">
           <a routerLink="master/weighbridge">Weight Bridge</a>
         </li>
+      </ul>
+      <li data-toggle="collapse" data-target="#material" class="collapsed">
+        <a><i class="fa fa-globe fa-lg"></i> Material Master <span class="arrow"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="material">
         <li routerLinkActive="active">
           <a routerLink="master/primaryMaterial">Primary Material</a>
         </li>
@@ -28,12 +56,25 @@
         <li routerLinkActive="active">
           <a routerLink="master/material">Material Master</a>
         </li>
+      </ul>
+      <li data-toggle="collapse" data-target="#bid" class="collapsed">
+        <a><i class="fa fa-car fa-lg"></i> Auctions <span class="arrow"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="bid">
         <li routerLinkActive="active">
-          <a routerLink="master/clientAddress">Client Address</a>
+          <a routerLink="master/bidSheet">Bid (Auction)</a>
         </li>
         <li routerLinkActive="active">
-            <a routerLink="master/client">Client</a>
+            <a routerLink="master/bidAllotment">Bid Allotment</a>
           </li>
+      </ul>
+      <li data-toggle="collapse" data-target="#new" class="collapsed">
+        <a><i class="fa fa-car fa-lg"></i> Others <span class="arrow"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="new">
+        <li routerLinkActive="active">
+          <a routerLink="master/client">Client</a>
+        </li>
         <li routerLinkActive="active">
           <a routerLink="master/taxUnit">Tax Unit</a>
         </li>
@@ -50,12 +91,12 @@
           <a routerLink="master/folio">Folio</a>
         </li>
         <li routerLinkActive="active">
-            <a routerLink="master/userRole">User Roles</a>
-          </li>
-          <li routerLinkActive="active">
-              <a routerLink="master/user">Users</a>
-            </li>
+          <a routerLink="master/userRole">User Roles</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="master/user">Users</a>
+        </li>
       </ul>
-    </div>
+    </ul>
   </div>
-</nav>
+</div>

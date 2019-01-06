@@ -132,7 +132,7 @@ export const ADMINCONFIG = {
                 'gridVisibility': true,
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
-            },{
+            }, {
                 'columnName': 'userRole',
                 'columnTitle': 'User Role',
                 'field': 'select',
@@ -884,6 +884,134 @@ export const ADMINCONFIG = {
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-12'
             },
+        ]
+    },
+    'bidSheet': {
+        'title': 'Bid Sheet',
+        'labelText': 'Bid',
+        'keyField': 'bitSheetId',
+        'twoColumn': false,
+        'getURL': '/admintool/listBidSheets',
+        'updateURL': '/admintool/updateBidSheet',
+        'deleteURL': '/admintool/deleteBidSheet',
+        'createURL': '/admintool/createBidSheet',
+        'view': [
+            {
+                'columnName': 'auctionNumber',
+                'columnTitle': 'Action Number',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'auctionFrom',
+                'columnTitle': 'Action From',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'auctionTo',
+                'columnTitle': 'Action To',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': true,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            }, {
+                'columnName': 'basicEMDRate',
+                'columnTitle': 'EMD Rate',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-6'
+            }, {
+                'columnName': 'lotNumber',
+                'columnTitle': 'Lot Number',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-6'
+            }, {
+                'columnName': 'lotDescription',
+                'columnTitle': 'Lot Description',
+                'field': 'textarea',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-12'
+            },
+            {
+                'columnName': 'numberOfBidders',
+                'columnTitle': 'No. of Bidders',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'numberOfBids',
+                'columnTitle': 'No. of Bids',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'numberOfWinners',
+                'columnTitle': 'No. of Winners',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'perInclusionOverFloorPrice',
+                'columnTitle': 'Per inclusion over floor price',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'totalValueAtBidPrice',
+                'columnTitle': 'Total value at bid price',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+            {
+                'columnName': 'totalValueAtFloorPrice',
+                'columnTitle': 'Total Value at floor price',
+                'field': 'text',
+                'mandatory': true,
+                'flexGrow': '1',
+                'gridVisibility': false,
+                'formVisibility': true,
+                'cssClass': 'col-xs-12 col-sm-4'
+            },
+
         ]
     }
 };
