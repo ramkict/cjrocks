@@ -1,4 +1,4 @@
-export const ADMINCONFIG = {
+export var ADMINCONFIG = {
     'department': {
         'title': 'Department Master',
         'labelText': 'Department',
@@ -844,7 +844,6 @@ export const ADMINCONFIG = {
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-12'
             },
-
             {
                 'columnName': 'clientDistrict',
                 'columnTitle': 'District',
@@ -1011,7 +1010,6 @@ export const ADMINCONFIG = {
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
             },
-
         ]
     },
     'bidAllotment': {
@@ -1019,7 +1017,7 @@ export const ADMINCONFIG = {
         'labelText': 'Allotment',
         'keyField': 'bidAllotmentId',
         'twoColumn': false,
-        'preload': ['bidSheet', 'department', 'client'],
+        'preload': ['bitSheet', 'department', 'client'],
         'getURL': '/admintool/listBidAllotments',
         'updateURL': '/admintool/updateBidAllotment',
         'deleteURL': '/admintool/deleteBidAllotment',
@@ -1029,7 +1027,7 @@ export const ADMINCONFIG = {
                 'columnName': 'auctionNumber',
                 'columnTitle': 'Action Number',
                 'field': 'select',
-                'lookup': 'bidSheet',
+                'lookup': 'bitSheet',
                 'lookupkey': 'bitSheetId',
                 'lookupdisplay': 'auctionNumber',
                 'mandatory': true,
@@ -1094,7 +1092,7 @@ export const ADMINCONFIG = {
                 'field': 'text',
                 'mandatory': true,
                 'flexGrow': '1',
-                'gridVisibility': true, 
+                'gridVisibility': true,
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
             }, {
@@ -1134,19 +1132,7 @@ export const ADMINCONFIG = {
                 'formVisibility': true,
                 'cssClass': 'col-xs-12 col-sm-4'
             }
-
         ]
-    },
-    'salesTax': {
-        'title': 'Sales Order Tax',
-        'labelText': 'Sales Tax',
-        'keyField': 'saleOrderTaxId',
-        'twoColumn': false,
-        'preload': ['bidSheet', 'department', 'client'],
-        'getURL': '/admintool/listBidAllotments',
-        'updateURL': '/admintool/updateBidAllotment',
-        'deleteURL': '/admintool/deleteBidAllotment',
-        'createURL': '/admintool/createBidAllotment',
-        'view': [ ]
     }
 };
+//# sourceMappingURL=admin.config.js.map

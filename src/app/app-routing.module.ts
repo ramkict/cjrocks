@@ -1,3 +1,4 @@
+import { OperatorComponent } from './operator/operator.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [LoginSessionGaurd] },
   { path: 'weight', component: WeightComponent, canActivate: [LoginSessionGaurd] },
+  { path: 'operator', component: OperatorComponent, canActivate: [LoginSessionGaurd] },
   { path: 'admin', loadChildren: './admin-master/admin-master.module#AdminMasterModule', canLoad: [LazyGaurd] }
 ];
 

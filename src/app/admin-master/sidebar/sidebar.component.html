@@ -30,7 +30,7 @@
 
     <ul id="menu-content" class="menu-content collapse out">
       <li data-toggle="collapse" data-target="#unit" class="collapsed active">
-        <a><i class="fa fa-gift fa-lg"></i> Unit Master <span class="arrow"></span></a>
+        <a><i class="fa fa-location-arrow fa-lg"></i> Unit Master <span class="arrow"></span></a>
       </li>
       <ul class="sub-menu collapse" id="unit">
         <li routerLinkActive="active">
@@ -65,16 +65,13 @@
           <a routerLink="master/bidSheet">Bid (Auction)</a>
         </li>
         <li routerLinkActive="active">
-            <a routerLink="master/bidAllotment">Bid Allotment</a>
-          </li>
-      </ul>
-      <li data-toggle="collapse" data-target="#new" class="collapsed">
-        <a><i class="fa fa-car fa-lg"></i> Others <span class="arrow"></span></a>
-      </li>
-      <ul class="sub-menu collapse" id="new">
-        <li routerLinkActive="active">
-          <a routerLink="master/client">Client</a>
+          <a routerLink="master/bidAllotment">Bid Allotment</a>
         </li>
+      </ul>
+      <li data-toggle="collapse" data-target="#tax" class="collapsed">
+        <a><i class="fa fa-car fa-lg"></i> Taxes <span class="arrow"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="tax">
         <li routerLinkActive="active">
           <a routerLink="master/taxUnit">Tax Unit</a>
         </li>
@@ -84,6 +81,15 @@
         <li routerLinkActive="active">
           <a routerLink="master/taxMapper">Tax Mapper</a>
         </li>
+      </ul>
+      <li data-toggle="collapse" data-target="#new" class="collapsed">
+        <a><i class="fa fa-car fa-lg"></i> Others <span class="arrow"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="new">
+        <li routerLinkActive="active">
+          <a routerLink="master/client">Client</a>
+        </li>
+
         <li routerLinkActive="active">
           <a routerLink="master/bay">Bay Master</a>
         </li>

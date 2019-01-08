@@ -1,3 +1,4 @@
+import * as tslib_1 from "tslib";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,25 +16,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginSessionGaurd, LazyGaurd } from './auth.gaurd';
 import { UnauthorizedComponent } from './utils/unauthorized/unauthorized.component';
 import { ErrorComponent } from './utils/error/error.component';
-import { OperatorComponent } from './operator/operator.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    LoginComponent,
-    FooterComponent,
-    HomeComponent,
-    WeightComponent,
-    UnauthorizedComponent,
-    ErrorComponent,
-    OperatorComponent,
-  ],
-  imports: [
-    BrowserModule, BrowserAnimationsModule, ReactiveFormsModule, FormsModule,
-    AppRoutingModule, AdminMasterModule, HttpClientModule
-  ],
-  providers: [ApplicationSession, LoginSessionGaurd, LazyGaurd],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+var AppModule = /** @class */ (function () {
+    function AppModule() {
+    }
+    AppModule = tslib_1.__decorate([
+        NgModule({
+            declarations: [
+                AppComponent,
+                NavbarComponent,
+                LoginComponent,
+                FooterComponent,
+                HomeComponent,
+                WeightComponent,
+                UnauthorizedComponent,
+                ErrorComponent,
+            ],
+            imports: [
+                BrowserModule, BrowserAnimationsModule, ReactiveFormsModule, FormsModule,
+                AppRoutingModule, AdminMasterModule, HttpClientModule
+            ],
+            providers: [ApplicationSession, LoginSessionGaurd, LazyGaurd],
+            bootstrap: [AppComponent]
+        })
+    ], AppModule);
+    return AppModule;
+}());
+export { AppModule };
+//# sourceMappingURL=app.module.js.map
